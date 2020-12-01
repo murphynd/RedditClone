@@ -49,6 +49,7 @@ class PostControl extends React.Component {
     });
   };
   handleEditClick = () => {
+    console.log("LINE 51 IS RUNNING!");
     this.setState({ editing: true });
   };
 
@@ -97,6 +98,7 @@ class PostControl extends React.Component {
     } else {
       currentlyVisibleState = (
         <PostList
+          onClickingDelete={this.handleDeleteClick}
           onClickingEdit={this.handleEditClick}
           postList={this.props.masterPostList}
         />

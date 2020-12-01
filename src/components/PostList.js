@@ -15,7 +15,8 @@ function PostList(props) {
           key={post.id}
           upvotes={post.upvotes}
           downvotes={post.downvotes}
-          editButton={post.onClickingEdit}
+          editButton={props.onClickingEdit}
+          // onClinckingDelete: PropTypes.func,
         />
       ))}
     </React.Fragment>
@@ -23,8 +24,7 @@ function PostList(props) {
 }
 
 PostList.propTypes = {
-  postList: PropTypes.object,
-  onClickingEdit: PropTypes.func,
+  onClickingDelete: PropTypes.func,
 };
 
 export default PostList;
