@@ -54,6 +54,7 @@ class PostControl extends React.Component {
   };
 
   handleDeletingPost = (id) => {
+    console.log("Deleting Post Function Executing");
     const { dispatch } = this.props;
     const action = {
       type: "DELETE_POST",
@@ -62,6 +63,10 @@ class PostControl extends React.Component {
     dispatch(action);
     this.setState({ selectedPost: null });
   };
+  // * 66-68 NOT NEEDED
+  // handleDeleteClick = () => {
+  //   this.setState({ selectedPost: null
+  // });
 
   handleAddingNewPostToList = (newPost) => {
     const { dispatch } = this.props;
@@ -90,6 +95,13 @@ class PostControl extends React.Component {
         />
       );
       buttonText = "Return to Post List";
+      // else if (this.state.selectedTicket != null) {
+      //   currentlyVisibleState =
+      //   <TicketDetail
+      //     ticket = {this.state.selectedTicket}
+      //     onClickingDelete = {this.handleDeletingTicket}
+      //     onClickingEdit = {this.handleEditClick} />
+      //   buttonText = "Return to Ticket List";
     } else if (this.state.formVisible) {
       currentlyVisibleState = (
         <NewPost onNewPostCreation={this.handleAddingNewPostToList} />
@@ -98,7 +110,7 @@ class PostControl extends React.Component {
     } else {
       currentlyVisibleState = (
         <PostList
-          onClickingDelete={this.handleDeleteClick}
+          onClickingDelete={this.handleDeletingPost}
           onClickingEdit={this.handleEditClick}
           postList={this.props.masterPostList}
         />

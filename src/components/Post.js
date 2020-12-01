@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 
 function Post(props) {
   console.log("sanity check");
-  const s = () => {
+  const e = () => {
     console.log("s");
-    props.editButton();
+    props.editButton(props);
+  };
+  const d = () => {
+    console.log("s");
+    props.deleteButton(props.id);
   };
   return (
     <React.Fragment>
@@ -16,8 +20,8 @@ function Post(props) {
         <p>
           <em>{props.content}</em>
         </p>
-        <button onClick={s}>Edit</button>
-        <button>{props.deleteButton}Delete</button>
+        <button onClick={e}>Edit</button>
+        <button onClick={d}>Delete</button>
       </div>
       <hr />
     </React.Fragment>
