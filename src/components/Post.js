@@ -11,6 +11,7 @@ function Post(props) {
         <p>
           <em>{props.content}</em>
         </p>
+        <button>{props.editButton}</button>
       </div>
       <hr />
     </React.Fragment>

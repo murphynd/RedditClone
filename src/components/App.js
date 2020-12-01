@@ -6,14 +6,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <div className="App">
-      <div className="container">
-        <div className="row">
-          <Header />
-        </div>
-        <br></br>
-        <br></br>
-        <div className="row">
-          <PostControl />
+      <div className="container-fluid">
+        <div className="col-12">
+          <div className="row">
+            <Header />
+          </div>
+          <br></br>
+          <br></br>
+          <div className="row">
+            <PostControl />
+          </div>
         </div>
       </div>
     </div>

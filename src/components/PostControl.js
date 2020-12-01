@@ -1,5 +1,6 @@
 import React from "react";
 import PostList from "./PostList";
+import EditPost from "./EditPost";
 import NewPost from "./NewPost";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -16,7 +17,7 @@ class PostControl extends React.Component {
   }
 
   handleClick = () => {
-    if (this.state.selectedPost != null) {
+    if (this.props.selectedPost != null) {
       this.setState({
         formVisible: false,
         selectedPost: null,
@@ -29,11 +30,6 @@ class PostControl extends React.Component {
     }
   };
 
-  handleNewPostClick = () => {
-    this.setState((prevState) => ({
-      postFormVisible: !prevState.postFormVisible,
-    }));
-  };
   handleEditingPostInList = (postToEdit) => {
     const { dispatch } = this.props;
     const { userName, content, timestamp, id, upvotes, downvotes } = postToEdit;
@@ -51,6 +47,9 @@ class PostControl extends React.Component {
       editing: false,
       selectedPost: null,
     });
+  };
+  handleEditClick = () => {
+    this.setState({ editing: true });
   };
 
   handleDeletingPost = (id) => {
@@ -76,19 +75,32 @@ class PostControl extends React.Component {
       downvotes: downvotes,
     };
     dispatch(action);
-    this.setState({ formVisibleOnPage: false });
+    this.setState({ formVisible: false });
   };
 
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.state.formVisible) {
+    if (this.state.editing) {
+      currentlyVisibleState = (
+        <EditPost
+          post={this.state.selectedPost}
+          onEditPost={this.handleEditingPostInList}
+        />
+      );
+      buttonText = "Return to Post List";
+    } else if (this.state.formVisible) {
       currentlyVisibleState = (
         <NewPost onNewPostCreation={this.handleAddingNewPostToList} />
       );
-      buttonText = "Return to post List";
+      buttonText = "Return to Post List";
     } else {
-      currentlyVisibleState = <PostList postList={this.props.masterPostList} />;
+      currentlyVisibleState = (
+        <PostList
+          onClickingEdit={this.handleEditClick}
+          postList={this.props.masterPostList}
+        />
+      );
 
       buttonText = "Add post";
     }
@@ -103,7 +115,6 @@ class PostControl extends React.Component {
           >
             {buttonText}
           </button>
-          {/* <button onClick={this.handleClick}>{buttonText}</button> */}
         </div>
       </React.Fragment>
     );
