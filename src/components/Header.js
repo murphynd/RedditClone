@@ -3,8 +3,8 @@ import React from "react";
 function Header() {
   return (
     <React.Fragment>
-      <div style={{ height: 50 }}>
-        <h1>Reddit</h1>
+      <div className="jumbotron">
+        <h1 className="display-2">Reddit</h1>
       </div>
     </React.Fragment>
   );
