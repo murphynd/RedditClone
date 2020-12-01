@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Header from "./Header";
 import PostControl from "./PostControl";
@@ -11,9 +10,6 @@ function App() {
         <div className="row">
           <Header />
         </div>
-        <br></br>
-        <br></br>
-        <br></br>
         <br></br>
         <br></br>
         <div className="row">

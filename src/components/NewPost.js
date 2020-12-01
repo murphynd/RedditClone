@@ -1,24 +1,30 @@
 import React from "react";
 import { v4 } from "uuid";
 import PropTypes from "prop-types";
+import ReusableForm from "./ReusableForm";
 
 function NewPost(props) {
   return (
     <React.Fragment>
-      <h1> New Post For</h1>
-  return (
-    <React.Fragment>
-      <h1> New Post For</h1>
-      <form onSubmit={props.formSubmissionHandler}>
-        <input type="text" name="content_body" placeholder="Content Body" />
-        <input type="text" name="username" placeholder="UserName" />
-        <button type="submit">Submit Post</button>
- 
-  NewPost.propTypes = {
-    onNewPostCreation: PropTypes.func
-  };
-  
+      <h1> New Post Form</h1>
+      <ReusableForm
+        formSubmissionHandler={handleNewPostFormSubmission}
+        buttonText="Add Post"
+      />
+    </React.Fragment>
+  );
+  function handleNewPostFormSubmission(event) {
+    event.preventDefault();
+    props.onNewPostCreation({
+      userName: event.target.userName.value,
+      content: event.target.content.value,
+      id: v4(),
+    });
+  }
+}
 
+NewPost.propTypes = {
+  onNewPostCreation: PropTypes.func,
+};
 
 export default NewPost;
-  }

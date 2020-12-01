@@ -5,11 +5,12 @@ import Post from "./Post";
 function PostList(props) {
   return (
     <React.Fragment>
+      <h1>List of Posts</h1>
       {Object.values(props.postList).map((post) => (
         <Post
-          name={post.username}
+          userName={post.userName}
           content={post.content}
-          timestamp={post.timestamp}
+          timestamp={post.timeStamp}
           id={post.id}
           key={post.id}
           upvotes={post.upvotes}

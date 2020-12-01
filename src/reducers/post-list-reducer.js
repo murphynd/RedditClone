@@ -1,5 +1,5 @@
 export default (state = {}, action) => {
-  const { timestamp, content, username, id, upvotes, downvotes } = action;
+  const { timestamp, content, userName, id, upvotes, downvotes } = action;
   switch (action.type) {
     case "ADD_UPDATE_POST":
       console.log("ADD POST REACHED");
@@ -7,7 +7,7 @@ export default (state = {}, action) => {
         [id]: {
           timestamp: timestamp,
           content: content,
-          username: username,
+          userName: userName,
           id: id,
           upvotes: upvotes,
           downvotes: downvotes,

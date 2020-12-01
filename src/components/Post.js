@@ -6,7 +6,7 @@ function Post(props) {
     <React.Fragment>
       <div>
         <h3>
-          {props.username} - {props.timestamp}
+          {props.userName} - {props.timeStamp}
         </h3>
         <p>
           <em>{props.content}</em>
@@ -18,9 +18,9 @@ function Post(props) {
 }
 
 Post.propTypes = {
-  timestamp: PropTypes.string,
+  timeStamp: PropTypes.string,
   content: PropTypes.string,
-  username: PropTypes.string,
+  userName: PropTypes.string,
   id: PropTypes.string,
   upvotes: PropTypes.string,
   downvotes: PropTypes.string,

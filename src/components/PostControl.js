@@ -36,10 +36,10 @@ class PostControl extends React.Component {
   };
   handleEditingPostInList = (postToEdit) => {
     const { dispatch } = this.props;
-    const { username, content, timestamp, id, upvotes, downvotes } = postToEdit;
+    const { userName, content, timestamp, id, upvotes, downvotes } = postToEdit;
     const action = {
       type: "ADD_UPDATE_POST",
-      username: username,
+      userName: userName,
       content: content,
       timestamp: timestamp,
       id: id,
@@ -65,12 +65,12 @@ class PostControl extends React.Component {
 
   handleAddingNewPostToList = (newPost) => {
     const { dispatch } = this.props;
-    const { username, content, timestamp, id, upvotes, downvotes } = newPost;
+    const { userName, content, timeStamp, id, upvotes, downvotes } = newPost;
     const action = {
       type: "ADD_UPDATE_POST",
-      username: username,
+      userName: userName,
       content: content,
-      timestamp: timestamp,
+      timeStamp: timeStamp,
       id: id,
       upvotes: upvotes,
       downvotes: downvotes,
@@ -83,12 +83,13 @@ class PostControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.formVisible) {
-      <NewPost onNewPostCreation={this.handleAddingNewPostToList} />;
+      currentlyVisibleState = (
+        <NewPost onNewPostCreation={this.handleAddingNewPostToList} />
+      );
       buttonText = "Return to post List";
     } else {
-      currentlyVisibleState = currentlyVisibleState = (
-        <PostList postList={this.props.masterPostList} />
-      );
+      currentlyVisibleState = <PostList postList={this.props.masterPostList} />;
+
       buttonText = "Add post";
     }
     return (
