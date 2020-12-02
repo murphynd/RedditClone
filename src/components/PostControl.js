@@ -95,7 +95,7 @@ class PostControl extends React.Component {
         />
       );
       buttonText = "Return to Post List";
-      // else if (this.state.selectedTicket != null) {
+      // else if (this.state.selectedPost != null) {
       //   currentlyVisibleState =
       //   <TicketDetail
       //     ticket = {this.state.selectedTicket}
