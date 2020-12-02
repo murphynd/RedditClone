@@ -8,6 +8,8 @@ function ReusableForm(props) {
         <input type="text" name="content" placeholder="Content Body" />
         <br />
         <input type="text" name="userName" placeholder="UserName" />
+        {/* <input type="hidden" name="upvotes" value="0" />
+        <input type="hidden" name="downvotes" value="0" /> */}
         <button className="btn btn-primary" type="submit">
           {props.buttonText}
         </button>

@@ -15,6 +15,8 @@ function PostList(props) {
           key={post.id}
           upvotes={post.upvotes}
           downvotes={post.downvotes}
+          upvoteButton={props.onClickingUpVote}
+          downvoteButton={props.onClickingDownVote}
           editButton={props.onClickingEdit}
           deleteButton={props.onClickingDelete}
           // onClinckingDelete: PropTypes.func,

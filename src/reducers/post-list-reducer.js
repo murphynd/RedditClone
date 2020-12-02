@@ -1,11 +1,10 @@
 export default (state = {}, action) => {
-  const { timestamp, content, userName, id, upvotes, downvotes } = action;
+  const { timeStamp, content, userName, id, upvotes, downvotes } = action;
   switch (action.type) {
     case "ADD_UPDATE_POST":
-      console.log("ADD POST REACHED");
       return Object.assign({}, state, {
         [id]: {
-          timestamp: timestamp,
+          timeStamp: timeStamp,
           content: content,
           userName: userName,
           id: id,
@@ -17,6 +16,14 @@ export default (state = {}, action) => {
       const newState = { ...state };
       delete newState[id];
       return newState;
+    case "UP_VOTE":
+      const upvote = { ...state };
+      upvote[id].upvotes++;
+      return upvote;
+    case "DOWN_VOTE":
+      const downvote = { ...state };
+      downvote[id].downvotes--;
+      return downvote;
     default:
       return state;
   }

@@ -29,7 +29,26 @@ class PostControl extends React.Component {
       }));
     }
   };
-
+  handleDownVotingPost = (id) => {
+    console.log("DownVote Post Function Executing");
+    const { dispatch } = this.props;
+    const action = {
+      type: "DOWN_VOTE",
+      id: id,
+    };
+    dispatch(action);
+    this.setState({});
+  };
+  handleUpVotingPost = (id) => {
+    console.log("UpVote Post Function Executing");
+    const { dispatch } = this.props;
+    const action = {
+      type: "UP_VOTE",
+      id: id,
+    };
+    dispatch(action);
+    this.setState({});
+  };
   handleEditingPostInList = (postToEdit) => {
     const { dispatch } = this.props;
     const { userName, content, timestamp, id, upvotes, downvotes } = postToEdit;
@@ -77,11 +96,35 @@ class PostControl extends React.Component {
       content: content,
       timeStamp: timeStamp,
       id: id,
-      upvotes: upvotes,
-      downvotes: downvotes,
+      upvotes: upvotes || Number("0"),
+      downvotes: downvotes || Number("0"),
     };
+    console.log(this.state);
     dispatch(action);
     this.setState({ formVisible: false });
+  };
+
+  whenUpvoteClicked = (post) => {
+    const { dispatch } = this.props;
+    const { id } = post;
+    const action = {
+      type: "UPDATE_UPVOTE",
+      id: id,
+    };
+    dispatch(action);
+    this.setState({});
+  };
+
+  whenDownvoteClicked = (post) => {
+    console.table(post);
+    const { dispatch } = this.props;
+    const { id } = post;
+    const action = {
+      type: "UPDATE_DOWNVOTE",
+      id: id,
+    };
+    dispatch(action);
+    this.setState({});
   };
 
   render() {
@@ -110,6 +153,8 @@ class PostControl extends React.Component {
     } else {
       currentlyVisibleState = (
         <PostList
+          onClickingDownVote={this.handleDownVotingPost}
+          onClickingUpVote={this.handleUpVotingPost}
           onClickingDelete={this.handleDeletingPost}
           onClickingEdit={this.handleEditClick}
           postList={this.props.masterPostList}

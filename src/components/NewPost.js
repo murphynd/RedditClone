@@ -18,6 +18,8 @@ function NewPost(props) {
     props.onNewPostCreation({
       userName: event.target.userName.value,
       content: event.target.content.value,
+      // upvotes: event.target.upvotes.value,
+      // downvotes: event.target.downvotes.value,
       id: v4(),
     });
   }

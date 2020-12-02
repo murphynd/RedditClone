@@ -4,9 +4,9 @@ describe("postListReducer", () => {
   let action;
 
   const postData = {
-    timestamp: "10:30",
+    timeStamp: "10:30",
     content: "Hello World",
-    username: "kalecat",
+    userName: "kalecat",
     id: 1,
     upvotes: 5,
     downvotes: 2,
@@ -14,17 +14,17 @@ describe("postListReducer", () => {
 
   const currentState = {
     1: {
-      timestamp: "10:30",
+      timeStamp: "10:30",
       content: "Hello World",
-      username: "kalecat",
+      userName: "kalecat",
       id: 1,
       upvotes: 5,
       downvotes: 2,
     },
     2: {
-      timestamp: "9:30",
+      timeStamp: "9:30",
       content: "wat",
-      username: "lildog",
+      userName: "lildog",
       id: 2,
       upvotes: 8,
       downvotes: 1,
@@ -32,21 +32,21 @@ describe("postListReducer", () => {
   };
 
   test("Should successfully add new post data to masterPostList", () => {
-    const { username, content, timestamp, id, upvotes, downvotes } = postData;
+    const { userName, content, timeStamp, id, upvotes, downvotes } = postData;
     action = {
       type: "ADD_UPDATE_POST",
-      timestamp: timestamp,
+      timeStamp: timeStamp,
       content: content,
-      username: username,
+      userName: userName,
       id: id,
       upvotes: upvotes,
       downvotes: downvotes,
     };
     expect(postListReducer({}, action)).toEqual({
       [id]: {
-        timestamp: timestamp,
+        timeStamp: timeStamp,
         content: content,
-        username: username,
+        userName: userName,
         id: id,
         upvotes: upvotes,
         downvotes: downvotes,
@@ -61,12 +61,60 @@ describe("postListReducer", () => {
     };
     expect(postListReducer(currentState, action)).toEqual({
       2: {
-        timestamp: "9:30",
+        timeStamp: "9:30",
         content: "wat",
-        username: "lildog",
+        userName: "lildog",
         id: 2,
         upvotes: 8,
         downvotes: 1,
+      },
+    });
+  });
+  test("Should successfully increment upvotes post data to masterPostList", () => {
+    action = {
+      type: "UP_VOTE",
+      id: 2,
+    };
+    expect(postListReducer(currentState, action)).toEqual({
+      1: {
+        timeStamp: "10:30",
+        content: "Hello World",
+        userName: "kalecat",
+        id: 1,
+        upvotes: 5,
+        downvotes: 2,
+      },
+      2: {
+        timeStamp: "9:30",
+        content: "wat",
+        userName: "lildog",
+        id: 2,
+        upvotes: 9,
+        downvotes: 1,
+      },
+    });
+  });
+  test("Should successfully increment upvotes post data to masterPostList", () => {
+    action = {
+      type: "DOWN_VOTE",
+      id: 2,
+    };
+    expect(postListReducer(currentState, action)).toEqual({
+      1: {
+        timeStamp: "10:30",
+        content: "Hello World",
+        userName: "kalecat",
+        id: 1,
+        upvotes: 5,
+        downvotes: 2,
+      },
+      2: {
+        timeStamp: "9:30",
+        content: "wat",
+        userName: "lildog",
+        id: 2,
+        upvotes: 9,
+        downvotes: 0,
       },
     });
   });

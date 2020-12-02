@@ -7,14 +7,10 @@ function App() {
   return (
     <div className="App">
       <div className="container-fluid">
-        <div className="row">
           <Header />
-        </div>
         <br></br>
         <br></br>
-        <div className="row">
           <PostControl />
-        </div>
       </div>
     </div>
   );
