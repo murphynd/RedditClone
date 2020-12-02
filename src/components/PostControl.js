@@ -50,16 +50,19 @@ class PostControl extends React.Component {
     this.setState({});
   };
   handleEditingPostInList = (postToEdit) => {
+    console.log("Edit this post!");
+    console.log(this.props.userName);
+    console.log(this.props.upvotes);
     const { dispatch } = this.props;
-    const { userName, content, timestamp, id, upvotes, downvotes } = postToEdit;
+    const { userName, content, timestamp, upvotes, downvotes, id } = postToEdit;
     const action = {
       type: "ADD_UPDATE_POST",
       userName: userName,
       content: content,
-      timestamp: timestamp,
+      timeStamp: timestamp,
       id: id,
-      upvotes: upvotes,
-      downvotes: downvotes,
+      upvotes: upvotes || Number("0"),
+      downvotes: downvotes || Number("0"),
     };
     dispatch(action);
     this.setState({
@@ -67,9 +70,16 @@ class PostControl extends React.Component {
       selectedPost: null,
     });
   };
-  handleEditClick = () => {
-    console.log("LINE 51 IS RUNNING!");
-    this.setState({ editing: true });
+  handleEditClick = (id) => {
+    // console.log(this.props.post.userName);
+    // console.log(this.props.post.upvotes);
+    // console.log("Handle Edit CLick");
+    // console.log(this.props.post.id);
+    const selectedPost = this.props.masterPostList[id];
+    this.setState({
+      editing: true,
+      selectedPost: selectedPost,
+    });
   };
 
   handleDeletingPost = (id) => {
@@ -138,13 +148,6 @@ class PostControl extends React.Component {
         />
       );
       buttonText = "Return to Post List";
-      // else if (this.state.selectedPost != null) {
-      //   currentlyVisibleState =
-      //   <TicketDetail
-      //     ticket = {this.state.selectedTicket}
-      //     onClickingDelete = {this.handleDeletingTicket}
-      //     onClickingEdit = {this.handleEditClick} />
-      //   buttonText = "Return to Ticket List";
     } else if (this.state.formVisible) {
       currentlyVisibleState = (
         <NewPost onNewPostCreation={this.handleAddingNewPostToList} />

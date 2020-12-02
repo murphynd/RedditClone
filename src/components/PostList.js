@@ -15,6 +15,7 @@ function PostList(props) {
           key={post.id}
           upvotes={post.upvotes}
           downvotes={post.downvotes}
+          selectedpost={props.post}
           upvoteButton={props.onClickingUpVote}
           downvoteButton={props.onClickingDownVote}
           editButton={props.onClickingEdit}

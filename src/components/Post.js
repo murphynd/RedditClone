@@ -8,7 +8,7 @@ function Post(props) {
   console.log("sanity check");
   const e = () => {
     console.log("e");
-    props.editButton(props);
+    props.editButton(props.id);
   };
   const d = () => {
     console.log("d");
@@ -43,6 +43,7 @@ function Post(props) {
         <button className="btn btn-primary" onClick={e}>
           Edit
         </button>
+
         <br />
         <button className="btn btn-dark" onClick={d}>
           Delete
