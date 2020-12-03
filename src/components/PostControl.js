@@ -6,27 +6,37 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 class PostControl extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-      selectedPost: null,
-      
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+    
+  //     selectedPost: null,
+  //   };
+  //   this.handleClick = this.handleClick.bind(this);
+  // }
 
   handleClick = () => {
+    const {dispatch}=this.props;
     if (this.props.selectedPost != null) {
-      this.setState({
-        formVisible: false,
-        selectedPost: null,
-        editing: false,
-      });
+      const action = {
+        type :"NO_POST"
+      };
+      dispatch(action);
+      const action2 = {
+        type:"TOGGLE_EDIT"
+      };
+      dispatch(action2);
+      // this.setState({
+      //   //formVisible: false,
+      //   selectedPost: null
+      //   // editing: false,
+      // });
     } else {
-      this.setState((prevState) => ({
-        formVisible: !prevState.formVisible,
-      }));
+      const { dispatch } = this.props;
+      const action = {
+        type: 'TOGGLE_FORM'
+    };
+    dispatch(action);
     }
   };
   handleDownVotingPost = (id) => {
@@ -37,7 +47,7 @@ class PostControl extends React.Component {
       id: id,
     };
     dispatch(action);
-    this.setState({});
+    // this.setState({});
   };
   handleUpVotingPost = (id) => {
     console.log("UpVote Post Function Executing");
@@ -47,12 +57,9 @@ class PostControl extends React.Component {
       id: id,
     };
     dispatch(action);
-    this.setState({});
+    // this.setState({});
   };
   handleEditingPostInList = (postToEdit) => {
-    console.log("Edit this post!");
-    console.log(this.props.userName);
-    console.log(this.props.upvotes);
     const { dispatch } = this.props;
     const { userName, content, timestamp, upvotes, downvotes, id } = postToEdit;
     const action = {
@@ -65,21 +72,35 @@ class PostControl extends React.Component {
       downvotes: downvotes || Number("0"),
     };
     dispatch(action);
-    this.setState({
-      editing: false,
-      selectedPost: null,
-    });
+    const action2 ={
+    type:"TOGGLE_EDIT"
+    }
+    dispatch(action2);
+    const action3 ={
+      type:"NO_POST"
+    }
+    dispatch(action3);
+    // this.setState({
+    //   //editing: false,
+    //   selectedPost: null,
+    // });
   };
   handleEditClick = (id) => {
-    // console.log(this.props.post.userName);
-    // console.log(this.props.post.upvotes);
-    // console.log("Handle Edit CLick");
-    // console.log(this.props.post.id);
+    const { dispatch } = this.props;
     const selectedPost = this.props.masterPostList[id];
-    this.setState({
-      editing: true,
-      selectedPost: selectedPost,
-    });
+    const action = {
+      type:'TOGGLE_EDIT'
+    }
+    dispatch(action);
+    const action2 = {
+      type:"SELECTED_POST"
+    }
+    dispatch(action.selectedPost);
+    
+    // this.setState({
+    //   selectedPost: selectedPost,
+    // });
+    
   };
 
   handleDeletingPost = (id) => {
@@ -90,8 +111,12 @@ class PostControl extends React.Component {
       id: id,
     };
     dispatch(action);
-    this.setState({ selectedPost: null });
-  };
+    const action2 = {
+      type:"NO_POST"
+    }
+    dispatch(action2);
+  //   this.setState({ selectedPost: null });
+  // };
   // * 66-68 NOT NEEDED
   // handleDeleteClick = () => {
   //   this.setState({ selectedPost: null
@@ -109,9 +134,12 @@ class PostControl extends React.Component {
       upvotes: upvotes || Number("0"),
       downvotes: downvotes || Number("0"),
     };
-    console.log(this.state);
+    console.log(this.props);
     dispatch(action);
-    this.setState({ formVisible: false });
+    const action2 = {
+      type: 'TOGGLE_FORM'
+    }
+    dispatch(action2);
   };
 
   whenUpvoteClicked = (post) => {
@@ -122,7 +150,7 @@ class PostControl extends React.Component {
       id: id,
     };
     dispatch(action);
-    this.setState({});
+    // this.setState({});
   };
 
   whenDownvoteClicked = (post) => {
@@ -134,21 +162,21 @@ class PostControl extends React.Component {
       id: id,
     };
     dispatch(action);
-    this.setState({});
+    // this.setState({});
   };
 
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.state.editing) {
+    if (this.props.editing) {
       currentlyVisibleState = (
         <EditPost
-          post={this.state.selectedPost}
+          post={this.props.selectedPost}
           onEditPost={this.handleEditingPostInList}
         />
       );
       buttonText = "Return to Post List";
-    } else if (this.state.formVisible) {
+    } else if (this.props.formVisible) {
       currentlyVisibleState = (
         <NewPost onNewPostCreation={this.handleAddingNewPostToList} />
       );
@@ -186,15 +214,16 @@ class PostControl extends React.Component {
 PostControl.propTypes = {
   masterPostList: PropTypes.object,
   formVisible: PropTypes.bool,
-  selectedPost: null,
+  selectedPost: PropTypes.object,
   editing: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
   return {
-    masterPostList: state.masterPostList
-    formVisible:state.formVisibleOnPage
-    editing:state.
+    masterPostList: state.masterPostList,
+    formVisible:state.formVisibleOnPage,
+    selectedPost: state.selectedPost,
+    editing:state.editAvailable
   };
 };
 
