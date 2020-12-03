@@ -9,9 +9,9 @@ class PostControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisible: false,
+      
       selectedPost: null,
-      editing: false,
+      
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -185,11 +185,16 @@ class PostControl extends React.Component {
 
 PostControl.propTypes = {
   masterPostList: PropTypes.object,
+  formVisible: PropTypes.bool,
+  selectedPost: null,
+  editing: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
   return {
-    masterPostList: state,
+    masterPostList: state.masterPostList
+    formVisible:state.formVisibleOnPage
+    editing:state.
   };
 };
 
